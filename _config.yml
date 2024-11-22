@@ -1,0 +1,5 @@
+title: "Portfolio Grom-P"
+description: "Freelance en Data et Assistance Informatique"
+theme: minima # Utilise le thème Jekyll "minima" (vous pouvez changer ou supprimer cela)
+baseurl: ""  # Laissez vide pour GitHub Pages
+url: "https://grom-p.github.io/portfolio"  # L'URL de votre site
