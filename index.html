@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Grom-P</title>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <!-- Styles -->
+    <style>
+        html, body {
+            position: relative;
+            height: 100%;
+        }
+        body {
+            background: #eee;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Background animation */
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* Profile Image Styling */
+        .profile-image {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            object-fit: cover;
+            border: 4px solid #fff;
+        }
+        .swiper-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            padding: 0 15px;
+        }
+
+        /* Skills Section */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .skills > div {
+            width: 45%;
+        }
+
+        .skill {
+            margin-bottom: 20px;
+        }
+
+        .skill-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .bar {
+            width: 100%;
+            height: 30px;
+            background: #ddd;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar span {
+            display: block;
+            height: 100%;
+            background: #4CAF50;
+            width: 0;
+            border-radius: 15px;
+            transition: width 1.5s ease-out;
+        }
+
+        .percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1rem;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Service Cards */
+        .service-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .service-card {
+            background: white;
+            color: black;
+            width: 300px;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Project grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 20px auto;
+        }
+
+        .project-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            opacity: 0.5;
+        }
+
+        .project-grid img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            opacity: 1;
+        }
+
+        .project-grid a {
+            position: relative;
+            display: block;
+        }
+
+        .project-grid a::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            pointer-events: none;
+        }
+
+        /* Contact form */
+        form {
+            background: white;
+            color: black;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin: 20px;
+        }
+
+        form .form-group {
+            margin-bottom: 15px;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        form button {
+            background-color: #23a6d5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #1e8fb3;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .skills > div {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .skills {
+                flex-direction: column;
+            }
+
+            .project-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .service-card {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .service-card {
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <!-- Swiper Container -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!-- Slide 1 -->
+            <div class="swiper-slide">
+                <img src="src/assets/img/16766737079869_IMG-0338.JPG" alt="Votre Photo" class="profile-image">
+                <h1>Bienvenue sur mon Portfolio</h1>
+                <p>Je suis Grom-P, un freelance spécialisé en analyse de données et assistance informatique.</p>
+
+                <!-- Skills Section -->
+                <div class="skills">
+                    <div>
+                        <h3>Hard Skills</h3>
+                        <div class="skill">
+                            <div class="skill-name">Python</div>
+                            <div class="bar">
+                                <span style="--percentage: 90%;"></span>
+                                <div class="percentage">0%</div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">SQL</div>
+                            <div class="bar">
+                                <span style="--percentage: 75%;"></span>
+                                <div class="percentage">0%</div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">JavaScript</div>
+                            <div class="bar">
+                                <span style="--percentage: 85%;"></span>
+                                <div class="percentage">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Soft Skills</h3>
+                        <div class="skill">
+                            <div class="skill-name">Adaptabilité</div>
+                            <div class="bar">
+                                <span style="--percentage: 85%;"></span>
+                                <div class="percentage">0%</div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">Collaboration</div>
+                            <div class="bar">
+                                <span style="--percentage: 90%;"></span>
+                                <div class="percentage">0%</div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">Créativité</div>
+                            <div class="bar">
+                                <span style="--percentage: 70%;"></span>
+                                <div class="percentage">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Slide 2 -->
+            <div class="swiper-slide color-2">
+                <h1>Mes Services</h1>
+                <div class="service-container">
+                    <div class="service-card">
+                        <img src="src/assets/img/2266550.png" alt="Analyse de Données">
+                        <h3>Analyse de Données</h3>
+                        <p>Création de tableaux de bord et analyses de données.</p>
+                    </div>
+                    <div class="service-card">
+                        <img src="src/assets/img/assistance-a-distance.jpg" alt="Assistance Informatique">
+                        <h3>Assistance Informatique</h3>
+                        <p>Dépannage de systèmes et configuration de réseaux.</p>
+                    </div>
+                    <div class="service-card">
+                        <img src="src/assets/img/erp.png" alt="Développement">
+                        <h3>Développement</h3>
+                        <p>Applications web, scripts automatisés et plus encore.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 3 - Projet Grid -->
+            <div class="swiper-slide color-3">
+                <h1>Mes Projets GitHub</h1>
+                <div class="project-grid">
+                    <a href="https://github.com/Grom-P/Analyse-indicateurs-egalite-femme-homme-Knime" target="_blank" data-text="Projet 1">
+                        <img src="src/assets/img/homme_femme.jpg" alt="Projet 1">
+                    </a>
+                    <a href="https://github.com/Grom-P/Etude-sante-publique-python" target="_blank" data-text="Projet 2">
+                        <img src="src/assets/img/NUTRITION.jpg" alt="Projet 2">
+                    </a>
+                    <a href="https://github.com/Grom-P/Base-de-donnees-immobiliere-sql" target="_blank" data-text="Projet 3">
+                        <img src="src/assets/img/sql.jpg" alt="Projet 3">
+                    </a>
+                    <a href="https://github.com/Grom-P/Detection-faux-billets" target="_blank" data-text="Projet 4">
+                        <img src="src/assets/img/FAUX BILLET.jpg" alt="Projet 4">
+                    </a>
+                    <a href="https://github.com/Grom-P/Crime-et-delinquances-PowerBI" target="_blank" data-text="Projet 5">
+                        <img src="src/assets/img/crime_delinquance.jpg" alt="Projet 5">
+                    </a>
+                    <a href="https://github.com/Grom-P/Etude-de-march-" target="_blank" data-text="Projet 6">
+                        <img src="src/assets/img/etude de marché.jpg" alt="Projet 6">
+                    </a>
+                </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="swiper-slide color-4">
+                <h1>Contactez-moi</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Nom ou Entreprise</label>
+                        <input type="text" id="name" name="name" placeholder="Votre nom ou entreprise" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adresse Email</label>
+                        <input type="email" id="email" name="email" placeholder="Votre email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Objet</label>
+                        <input type="text" id="subject" name="subject" placeholder="Objet de votre demande" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Décrivez votre demande" required></textarea>
+                    </div>
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
+        </div>
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            parallax: true,
+            speed: 1200,
+            direction: 'vertical',
+            mousewheel: true,
+        });
+
+        const skills = document.querySelectorAll('.skill');
+
+        function incrementCounter(element, targetValue) {
+            let currentValue = 0;
+            const increment = Math.ceil(targetValue / 30);
+            const interval = setInterval(() => {
+                currentValue += increment;
+                if (currentValue >= targetValue) {
+                    currentValue = targetValue;
+                    clearInterval(interval);
+                }
+                element.textContent = `${currentValue}%`;
+            }, 50);
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const skill = entry.target;
+                    const percentageSpan = skill.querySelector('.percentage');
+                    const barSpan = skill.querySelector('.bar span');
+                    const targetValue = parseInt(barSpan.style.getPropertyValue('--percentage'));
+                    barSpan.style.width = `${targetValue}%`;
+                    incrementCounter(percentageSpan, targetValue);
+                    observer.unobserve(skill);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        skills.forEach(skill => observer.observe(skill));
+    </script>
+</body>
+</html>
