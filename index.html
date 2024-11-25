@@ -65,16 +65,21 @@
             margin-bottom: 1rem;
         }
         h2 {
-            color: black; /* Remplacez "blue" par la couleur de votre choix */
-            }
-
-
+            color : black;
+        }
+		h3 {
+            color : red;
+        }
         p {
             font-size: 1.2rem;
             max-width: 800px;
             padding: 0 15px;
         }
-
+		h2 + ul {
+			
+		   
+		margin-top: 0; /* Enlève l'espace au-dessus de la liste */
+		}
         /* Skills Section */
         .skills {
             display: flex;
@@ -111,7 +116,7 @@
         .bar span {
             display: block;
             height: 100%;
-            background: #460d4f;
+            background: #343834;
             width: 0;
             border-radius: 15px;
             transition: width 1.5s ease-out;
@@ -296,8 +301,20 @@
             <!-- Slide 1 -->
             <div class="swiper-slide">
                 <img src="src/assets/img/16766737079869_IMG-0338.JPG" alt="Votre Photo" class="profile-image">
-                <h1>Bienvenue</h1>
-                <p>Je suis Grom-P, un freelance spécialisé en analyse de données et assistance informatique.</p>
+				<h2>
+				Je suis <strong>Jérôme Parnasse</strong>, freelance en informatique, prêt à vous accompagner dans vos projets.
+				</h2>
+				<p>
+					Vous avez besoin d’un analyste en données 📊 ou d’une assistance informatique 💻 ?
+				</p>
+				<p>
+					Je propose des prestations à des tarifs compétitif.
+				</p>
+				<p>
+				Chaque mission est réalisée avec rigueur, clarté et une approche 100% personnalisée.
+				</p>
+					
+				
 
                 <!-- Skills Section -->
                 <div class="skills">
@@ -360,17 +377,23 @@
                     <div class="service-card">
                         <img src="src/assets/img/2266550.png" alt="Analyse de Données">
                         <h3>Analyse de Données</h3>
-                        <p>Création de tableaux de bord et analyses de données.</p>
+                        <h4>Nettoyage et structuration.</h4>
+						<h4>Conception de tableaux de bord interactifs.</h4>
+						<h4>Rapports synthétiques et visuels.</h4>
                     </div>
                     <div class="service-card">
                         <img src="src/assets/img/assistance-a-distance.jpg" alt="Assistance Informatique">
                         <h3>Assistance Informatique</h3>
-                        <p>Dépannage de systèmes et configuration de réseaux.</p>
+                        <h4>Résolution informatiques courants .</h4>
+						<h4>Configuration de réseaux simples.</h4>
+						<h4>Prise en main à distance.</h4>
                     </div>
                     <div class="service-card">
-                        <img src="src/assets/img/erp.png" alt="Développement">
+                        <img src="src/assets/img/erp.jpg" alt="Développement">
                         <h3>Développement</h3>
-                        <p>Applications web, scripts automatisés et plus encore.</p>
+                        <h4>Applications web, scripts automatisés .</h4>
+						<h4>Création de tableaux automatisés pour des stocks ou des ventes.</h4>
+						<h4>Web scrapping, chatbot, Api.</h4>
                     </div>
                 </div>
             </div>
@@ -402,26 +425,25 @@
             <!-- Slide 4 -->
             <div class="swiper-slide color-4">
                 <h1>Contactez-moi</h1>
-                <form>
-                    <div class="form-group">
-                        <label for="name">Nom ou Entreprise</label>
-                        <input type="text" id="name" name="name" placeholder="Votre nom ou entreprise" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Adresse Email</label>
-                        <input type="email" id="email" name="email" placeholder="Votre email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Objet</label>
-                        <input type="text" id="subject" name="subject" placeholder="Objet de votre demande" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="4" placeholder="Décrivez votre demande" required></textarea>
-                    </div>
-                    <button type="submit">Envoyer</button>
-                </form>
-            </div>
+			 <form id="contact-form">
+				<div class="form-group">
+					<label for="name">Nom ou Entreprise</label>
+					<input type="text" id="name" name="name" placeholder="Votre nom ou entreprise" required>
+				</div>
+				<div class="form-group">
+					<label for="email">Adresse Email</label>
+					<input type="email" id="email" name="email" placeholder="Votre email" required>
+				</div>
+				<div class="form-group">
+					<label for="subject">Objet</label>
+					<input type="text" id="subject" name="subject" placeholder="Objet de votre demande" required>
+				</div>
+				<div class="form-group">
+					<label for="message">Message</label>
+					<textarea id="message" name="message" rows="7" placeholder="Décrivez votre demande" required></textarea>
+				</div>
+				<button type="submit">Envoyer</button>
+			</form>         
         </div>
         <!-- Pagination -->
         <div class="swiper-pagination"></div>
@@ -435,7 +457,7 @@
                 clickable: true,
             },
             parallax: true,
-            speed: 1200,
+            speed: 1500,
             direction: 'vertical',
             mousewheel: true,
         });
@@ -470,6 +492,49 @@
         }, { threshold: 0.5 });
 
         skills.forEach(skill => observer.observe(skill));
+						// Fonction qui sera exécutée lors de la soumission du formulaire
+				document.getElementById("contact-form").addEventListener("submit", function(event) {
+					event.preventDefault();  // Empêche le comportement par défaut de soumission du formulaire
+
+					// Récupération des données du formulaire
+					var name = document.getElementById("name").value;
+					var email = document.getElementById("email").value;
+					var subject = document.getElementById("subject").value;
+					var message = document.getElementById("message").value;
+
+					// Paramètres de la requête JSON pour EmailJS
+					var data = {
+						"user_id": "dQrNlAoFJcib5tz9n",  // Remplacez par votre clé publique EmailJS
+						"service_id": "service_fjwdjr9",  // Remplacez par votre ID de service
+						"template_id": "template_3rtu5ol",  // Remplacez par votre ID de modèle
+						"template_params": {
+							"email": email,  // L'email reçu par votre service
+							"subject": subject,  // Sujet du message
+							"message": message,  // Message que vous envoyez
+							"name": name  // Nom ou entreprise
+						}
+					};
+
+					// Envoi de la requête HTTP POST vers EmailJS
+					fetch("https://api.emailjs.com/api/v1.0/email/send", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(data)  // Conversion des données en JSON
+					})
+					.then(function(response) {
+						if (response.ok) {
+							alert("Message envoyé avec succès !");
+							document.getElementById("contact-form").reset();  // Réinitialiser le formulaire
+						} else {
+							alert("Erreur lors de l'envoi du message");
+						}
+					})
+					.catch(function(error) {
+						alert("Erreur lors de l'envoi : " + error.message);
+					});
+				});
     </script>
 </body>
 </html>
